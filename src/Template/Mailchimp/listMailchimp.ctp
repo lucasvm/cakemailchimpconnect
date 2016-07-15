@@ -22,7 +22,8 @@
 							<tr>
 								<td><?php echo $list->id; ?> </td>
 								<td><?php echo $list->name; ?></td>
-								<td><a class="btn update" href="#editModal<?php echo $list->id; ?>" data-sfid='"<?php echo $list->id; ?>"' data-toggle="modal">Edit</a>
+								<td>
+								<a href="#editModal<?php echo $list->id; ?>" data-sfid='"<?php echo $list->id; ?>"' data-toggle="modal" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-edit"></span></a>
 									<!--Yor Edit Modal Goes Here-->
 									<div id="editModal<?php echo $list->id; ?>" class="modal hide fade in" role="dialog" ria-labelledby="myModalLabel" aria-hidden="true">
 									 <div class="modal-header">
@@ -33,6 +34,8 @@
 								<td><?php echo $this->Html->link(
 								'Delete',
 								array('controller' => 'mailchimp', 'action' => 'deletelist', $list->id),
+								array('class' => 'btn btn-primary btn-danger'),
+								array('span' => 'glyphicon glyphicon-floppy-remove'),
 								array(),
 								"Are you sure you wish to delete this recipe?"
 							); ?></td>
