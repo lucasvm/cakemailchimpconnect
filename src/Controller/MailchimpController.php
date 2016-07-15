@@ -16,6 +16,91 @@ class MailchimpController extends AppController
         $this->Auth->allow(['add', 'logout']);
     }
 	
+	/*
+	Get members information from a listid
+	*/
+	public function members($listid)
+	{
+		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+	$dataCenter = substr($apikey,strpos($apikey,'-')+1);
+	$request_type = 'GET';
+	
+		$mch = curl_init();
+		$headers = array(
+			'Content-Type: application/json',
+			'Authorization: Basic '.base64_encode( 'user:'. $apikey )
+		);
+		curl_setopt($mch, CURLOPT_URL, 'https://'. $dataCenter . '.api.mailchimp.com/3.0/lists/'.$listid.'/members');
+		curl_setopt($mch, CURLOPT_HTTPHEADER, $headers);
+		//curl_setopt($mch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+		curl_setopt($mch, CURLOPT_RETURNTRANSFER, true); // do not echo the result, write it into variable
+		curl_setopt($mch, CURLOPT_CUSTOMREQUEST, $request_type); // according to MailChimp API: POST/GET/PATCH/PUT/DELETE
+		curl_setopt($mch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($mch, CURLOPT_SSL_VERIFYPEER, false); // certificate verification for TLS/SSL connection
+	 
+		$result = curl_exec($mch);
+		$getMembers = json_decode($result);
+		$this->set('members', $getMembers);
+		$this->set('listid', $listid);
+	}
+	
+	public function deletemember($memberid, $listid)
+	{
+		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
+		$request_type = 'DELETE';
+	
+		$mch = curl_init();
+		$headers = array(
+			'Content-Type: application/json',
+			'Authorization: Basic '.base64_encode( 'user:'. $apikey )
+		);
+		curl_setopt($mch, CURLOPT_URL, 'https://'. $dataCenter . '.api.mailchimp.com/3.0/lists/'.$listid.'/members/'.$memberid);
+		curl_setopt($mch, CURLOPT_HTTPHEADER, $headers);
+		//curl_setopt($mch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+		curl_setopt($mch, CURLOPT_RETURNTRANSFER, true); // do not echo the result, write it into variable
+		curl_setopt($mch, CURLOPT_CUSTOMREQUEST, $request_type); // according to MailChimp API: POST/GET/PATCH/PUT/DELETE
+		curl_setopt($mch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($mch, CURLOPT_SSL_VERIFYPEER, false); // certificate verification for TLS/SSL connection
+	 
+		$result = curl_exec($mch);
+		$getMembers = json_decode($result);
+		$this->set('members', $getMembers);
+	}
+	
+	public function addmember()
+	{
+		$email = $_POST['memberemail'];
+		$listid = $_POST['listid'];
+		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
+		$request_type = 'POST';
+		$data = [
+                    'email_address' => $email,
+                    'status' => 'subscribed' ];	
+	
+		$mch = curl_init();
+		$headers = array(
+			'Content-Type: application/json',
+			'Authorization: Basic '.base64_encode( 'user:'. $apikey )
+		);
+		curl_setopt($mch, CURLOPT_URL, 'https://'. $dataCenter . '.api.mailchimp.com/3.0/lists/'.$listid.'/members/');
+		curl_setopt($mch, CURLOPT_HTTPHEADER, $headers);
+		//curl_setopt($mch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+		curl_setopt($mch, CURLOPT_RETURNTRANSFER, true); // do not echo the result, write it into variable
+		curl_setopt($mch, CURLOPT_CUSTOMREQUEST, $request_type); // according to MailChimp API: POST/GET/PATCH/PUT/DELETE
+		curl_setopt($mch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($mch, CURLOPT_SSL_VERIFYPEER, false); // certificate verification for TLS/SSL connection
+		if( $request_type != 'GET' ) {
+			curl_setopt($mch, CURLOPT_POST, true);
+			curl_setopt($mch, CURLOPT_POSTFIELDS, json_encode($data) ); // send data in json
+		}
+	 
+		$result = curl_exec($mch);
+		$getMembers = json_decode($result);
+		$this->set('members', $getMembers);
+	}
+	
 	public function add()
 	{
 	/*

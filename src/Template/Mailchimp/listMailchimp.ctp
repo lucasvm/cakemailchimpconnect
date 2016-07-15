@@ -9,6 +9,7 @@
 				  <tr>
 					<th>#</th>
 					<th>Name</th>
+					<th>Members</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				  </tr>
@@ -22,6 +23,10 @@
 							<tr>
 								<td><?php echo $list->id; ?> </td>
 								<td><?php echo $list->name; ?></td>
+								<td><?php echo $this->Html->link(
+								'Get All',
+								array('controller' => 'mailchimp', 'action' => 'members', $list->id)
+							); ?></td>
 								<td>
 								<a href="#editModal<?php echo $list->id; ?>" data-sfid='"<?php echo $list->id; ?>"' data-toggle="modal" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-edit"></span></a>
 									<!--Yor Edit Modal Goes Here-->
@@ -34,8 +39,7 @@
 								<td><?php echo $this->Html->link(
 								'Delete',
 								array('controller' => 'mailchimp', 'action' => 'deletelist', $list->id),
-								array('class' => 'btn btn-primary btn-danger'),
-								array('span' => 'glyphicon glyphicon-floppy-remove'),
+								array('class' => 'btn btn-primary btn-danger', 'span' => 'glyphicon glyphicon-floppy-remove'),
 								array(),
 								"Are you sure you wish to delete this recipe?"
 							); ?></td>
