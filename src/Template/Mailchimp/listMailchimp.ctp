@@ -2,6 +2,7 @@
 <div class="row">
 <div class="container">
 			  <p>Lists already created on Mailchimp Account</p>
+			  <p><a href="#myModal" role="button" class="btn btn-large btn-primary" data-toggle="modal" >Create New List</a></p>
 			  <div class="table-responsive">
 			  <table class="table">
 				<thead>
@@ -21,8 +22,13 @@
 							<tr>
 								<td><?php echo $list->id; ?> </td>
 								<td><?php echo $list->name; ?></td>
-								<td><span class="glyphicon glyphicon-edit"></span> </td>
-								<td><span class="glyphicon glyphicon-remove"></span></td>
+								<td><?php echo $this->Html->link('home', '/'); ?> </td>
+								<td><?php echo $this->Html->link(
+								'Delete',
+								array('controller' => 'mailchimp', 'action' => 'deletelist', $list->id),
+								array(),
+								"Are you sure you wish to delete this recipe?"
+							); ?></td>
 							</tr>
 							</tbody>
 								<?php
@@ -43,4 +49,25 @@
 		</table>
 	</div>
 	</div>
+</div>
+
+ 
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Create New List</h4>
+            </div>
+            <div class="modal-body">
+                <?php echo $this->Form->create('Post', array('url' => '/mailchimp/add')); ?>
+				  <div class="form-group">
+					<?php echo $this->Form->input('listname'); ?>
+				  </div>
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>
+            </div>
+        </div>
+    </div>
 </div>

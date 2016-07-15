@@ -19,6 +19,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <html>
 <head>
     <?= $this->Html->charset() ?>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -77,6 +81,29 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+	<script>
+		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+			// Avoid following the href location when clicking
+			event.preventDefault(); 
+			// Avoid having the menu to close when clicking
+			event.stopPropagation(); 
+			// If a menu is already open we close it
+			//$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+			// opening the one you clicked on
+			$(this).parent().addClass('open');
+
+			var menu = $(this).parent().find("ul");
+			var menupos = menu.offset();
+		  
+			if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+				var newpos = - menu.width();      
+			} else {
+				var newpos = $(this).parent().width();
+			}
+			menu.css({ left:newpos });
+
+		});
+	</script>
     </footer>
 </body>
 </html>
