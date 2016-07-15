@@ -22,7 +22,14 @@
 							<tr>
 								<td><?php echo $list->id; ?> </td>
 								<td><?php echo $list->name; ?></td>
-								<td><?php echo $this->Html->link('home', '/'); ?> </td>
+								<td><a class="btn update" href="#editModal<?php echo $list->id; ?>" data-sfid='"<?php echo $list->id; ?>"' data-toggle="modal">Edit</a>
+									<!--Yor Edit Modal Goes Here-->
+									<div id="editModal<?php echo $list->id; ?>" class="modal hide fade in" role="dialog" ria-labelledby="myModalLabel" aria-hidden="true">
+									 <div class="modal-header">
+										<a class="close" data-dismiss="modal">×</a>
+										<h3>Edit Customer Details</h3>
+									</div>
+								</td>
 								<td><?php echo $this->Html->link(
 								'Delete',
 								array('controller' => 'mailchimp', 'action' => 'deletelist', $list->id),
@@ -31,7 +38,27 @@
 							); ?></td>
 							</tr>
 							</tbody>
-								<?php
+							<div id="editModal<?php echo $list->id; ?>" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title">Edit List <?php echo $list->name; ?></h4>
+									</div>
+									<div class="modal-body">
+										<?php echo $this->Form->create('Post', array('url' => '/mailchimp/editlist')); ?>
+										  <div class="form-group">
+											<?php echo $this->Form->input('listname', array('default'=>$list->name)); ?>
+											<?php echo $this->Form->hidden('id', array('default'=>$list->id)); ?>
+										  </div>
+										  <button type="submit" class="btn btn-default">Submit</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<?php
 							
 						  }
 						  break;	
@@ -71,3 +98,5 @@
         </div>
     </div>
 </div>
+
+
