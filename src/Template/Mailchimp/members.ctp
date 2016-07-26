@@ -20,7 +20,10 @@
 								<td><?php echo $this->Html->link(
 								'Delete',
 								array('controller' => 'mailchimp', 'action' => 'deletemember', $member->id, $listid),
-								array('confirm' => 'Do you want really to delete this element?','class' => 'btn btn-danger btn-sm active')); ?></td>
+								array('class' => 'btn btn-primary btn-danger', 'span' => 'glyphicon glyphicon-floppy-remove'),
+								array('confirm' =>
+								"Are you sure you wish to delete this recipe?")
+							); ?></td>
 							</tr>
 					</tbody>
 					<?php

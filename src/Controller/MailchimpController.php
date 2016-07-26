@@ -44,8 +44,9 @@ class MailchimpController extends AppController
 		$this->set('listid', $listid);
 	}
 	
-	public function deletemember($memberid, $listid)
+	public function deletemember($memberid)
 	{
+
 		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
 		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 		$request_type = 'DELETE';

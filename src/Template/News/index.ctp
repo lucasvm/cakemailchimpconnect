@@ -36,4 +36,19 @@
 		</table>
 	</div>
 	</div>
+	<div class="paginator">
+	<?php
+	    echo $this->Paginator->counter(
+	            'Showing {{start}} to {{end}} of total {{count}}'
+	    );
+	    ?>
+    <nav>
+        <ul class="pagination">
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?> 
+        </ul>
+    </nav>
+        <p><?= $this->Paginator->counter() ?></p>
+	</div> 
 </div>

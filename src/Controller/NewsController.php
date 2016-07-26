@@ -48,7 +48,7 @@ class NewsController extends AppController
 		$news = $this->News->find('all')
     				 ->where(['News.status =' => '1']);
 					 
-		$this->set(compact('news'));
+		$this->set('news', $this->paginate($news));
 	}
 	
 	public function view($id = null)
@@ -92,39 +92,24 @@ class NewsController extends AppController
 	{
 		//Add news and asign to user id.
 		$news = $this->News->newEntity();
-		
-		
-		$this->loadModel('Categories');
-		
-		$this->set('categories', $this->Categories->find('all'));
-		
-		
-		if ($this->request->is('post')) {
-			$newsN = $this->News->patchEntity($news, $this->request->data);
-			$photos = $this->request->data['ad_photos'];
-			foreach ($photos as $photo ) {
-                $photo = [
-                    'name' => $this->request->data['ad_photos']['name'],
-                    'type' => $this->request->data['ad_photos']['type'],
-                    'tmp_name' => $this->request->data['ad_photos']['tmp_name'],
-                    'error' => $this->request->data['ad_photos']['error'],
-                    'size' => $this->request->data['ad_photos']['size']
-                ];
-                //echo "<pre>"; print_r($photo); echo "</pre>";
-            }
-			$news->user_id = $this->Auth->user('id');
-
-			$newData = ['user_id' => $this->Auth->user('id')];
-			$newsN = $this->News->patchEntity($newsN, $newData);
-			if ($this->News->save($news)) {
-				$this->Flash->success(__('Your news has been saved.'));
-				return $this->redirect(['action' => 'index']);
-			}
-			$this->Flash->error(__('Unable to add your article.'));
-		}
 		$this->set('news', $news);
+
+	     if ($this->request->is('post'))
+	     {
+	         $news = $this->News->patchEntity($news, $this->request->data);
+	         $news->user_id = $this->Auth->user('id');
+
+	         if ($result = $this->News->save($news))
+	         {
+	             $this->Flash->success(__('Your article has been saved.'));
+	             return $this->redirect(['action' => 'index']);
+	         }
+	         $this->Flash->error(__('Unable to add your article.'));
+	     }
+	     $categories = $this->News->Categories->find('list');
+	    $this->set(compact('categories'));
 	}
-	
+
 	public function tags()
 	{
 		// The 'pass' key is provided by CakePHP and contains all

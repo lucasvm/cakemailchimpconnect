@@ -33,10 +33,10 @@ class UsersController extends AppController
         return $this->redirect($this->Auth->logout());
     }
 
-     public function index()
-     {
+    public function index()
+    {
         $this->set('users', $this->Users->find('all'));
-     }
+    }
 
     public function view($id)
     {
