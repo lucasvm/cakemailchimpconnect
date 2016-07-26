@@ -53,11 +53,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><?php echo $this->Html->link('Create News', ['controller' => 'News', 'action' => 'add']); ?></h1>
-            </li>
 			<li class="name">
-                <h1><?php echo $this->Html->link('All News', ['controller' => 'News', 'action' => 'index']); ?></h1>
+                <h1><?php echo $this->Html->link('Manage News', ['controller' => 'News', 'action' => 'index']); ?></h1>
             </li>
             <li class="name">
                 <h1><?php echo $this->Html->link('Manage Categories', ['controller' => 'Categories', 'action' => 'index']); ?></h1>

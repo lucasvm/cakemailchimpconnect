@@ -1,47 +1,41 @@
-<h1>News</h1>
-<div class="row">
-<div class="container">
-			  <p>List all news</p>
-			  <div class="table-responsive">
-			  <table class="table">
-				<thead>
-				  <tr>
-					<th>Title</th>
-					<th>Body</th>
-					<th>Date</th>
-					<th>Edit</th>
-					<th>Remove</th>
-				  </tr>
-				</thead>
-				
-				<?php if(!empty($news)): foreach($news as $newsFor):
-							?>
-							<tbody>
-							<tr>
-								<td><a href="javascript:void(0);"><?php echo $newsFor->title; ?></a></td>
-								<td><p><?php echo $newsFor->body; ?></p> </td>
-								<td><?= $newsFor->created->format(DATE_RFC850) ?></td>
-								<td><?= $this->Html->link('Edit', ['action' => 'edit', $newsFor->id]) ?></td>
-								<td><?= $this->Form->postLink(
-										'Delete',
-										['action' => 'delete', $newsFor->id],
-										['confirm' => 'Are you sure?'])
-									?></td>
-							</tr>
-							</tbody>
-							<?php
-						  endforeach;	else: ?>
-						<p class="no-record">No post(s) found......</p>
-						<?php endif; ?>
-		</table>
-	</div>
-	</div>
-	<div class="paginator">
-	<?php
-	    echo $this->Paginator->counter(
-	            'Showing {{start}} to {{end}} of total {{count}}'
-	    );
-	    ?>
+<div class="actions columns large-2 medium-3">
+    <h3><?= __('Actions') ?></h3>
+    <ul class="side-nav">
+        <li><?= $this->Html->link(__('Create News'), ['action' => 'add']) ?></li>
+    </ul>
+</div>
+<div class="categories index large-10 medium-9 columns">
+    <table cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th class="actions"><?= __('Actions') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($news as $article): ?>
+        <tr>
+            <td><?= $this->Number->format($article->id) ?></td>
+            <td><?= h($article->title) ?></td>
+            <td><?= h($article->body) ?></td>
+            <td><?= h($article->created) ?></td>
+            <td class="actions">
+                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $article->id]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $article->id], ['confirm' => __('Are you sure you want to delete # {0}?', $article->id)]) ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+    </table>
+    <div class="paginator">
+    <?php
+        echo $this->Paginator->counter(
+                'Showing {{start}} to {{end}} of total {{count}}'
+        );
+        ?>
     <nav>
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -50,5 +44,5 @@
         </ul>
     </nav>
         <p><?= $this->Paginator->counter() ?></p>
-	</div> 
+    </div> 
 </div>
