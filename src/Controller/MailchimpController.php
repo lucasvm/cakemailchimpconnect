@@ -22,8 +22,8 @@ class MailchimpController extends AppController
 	public function members($listid)
 	{
 		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
-	$dataCenter = substr($apikey,strpos($apikey,'-')+1);
-	$request_type = 'GET';
+		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
+		$request_type = 'GET';
 	
 		$mch = curl_init();
 		$headers = array(
@@ -99,6 +99,7 @@ class MailchimpController extends AppController
 	 
 		$result = curl_exec($mch);
 		$getMembers = json_decode($result);
+		
 		$this->set('members', $getMembers);
 	}
 	
