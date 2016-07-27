@@ -623,3 +623,9 @@ div.message.hidden {
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: #c5c5c5;
+  border-color: #428bca;
+}

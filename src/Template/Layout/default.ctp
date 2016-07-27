@@ -36,6 +36,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
+    <link id="active_style" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?= $cakeDescription ?>:
@@ -51,37 +52,44 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-			<li class="name">
-                <h1><?php echo $this->Html->link('Manage News', ['controller' => 'News', 'action' => 'index']); ?></h1>
-            </li>
-            <li class="name">
-                <h1><?php echo $this->Html->link('Manage Categories', ['controller' => 'Categories', 'action' => 'index']); ?></h1>
-            </li>
-            <li class="name">
-                <h1><?php echo $this->Html->link('Manage MailChimp', ['controller' => 'Mailchimp', 'action' => 'listmailchimp']); ?></h1>
-            </li>
-        </ul>
-		
-        <div class="top-bar-section">
-		    <ul class="right">
-				<li><a>
-				<?php
-				if (is_null($this->request->session()->read('Auth.User.username'))) {
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">App Name</a>
+	    </div>
+	    <div>
+	      <ul class="nav navbar-nav">
+	        <li class="active"><?php echo $this->Html->link('Home', ['controller' => 'News', 'action' => 'index']); ?></li>
+	        <li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage
+	          <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><?php echo $this->Html->link('Manage News', ['controller' => 'News', 'action' => 'index']); ?></li>
+	            <li><?php echo $this->Html->link('Manage Categories', ['controller' => 'Categories', 'action' => 'index']); ?></li>
+	            <li><a href="#"><?php echo $this->Html->link('Manage MailChimp', ['controller' => 'Mailchimp', 'action' => 'listmailchimp']); ?></a></li> 
+	          </ul>
+	        </li>
+	      </ul>
+	      <div class="top-bar-section">
+			    <ul class="right">
+					<li><a>
+					<?php
+					if (is_null($this->request->session()->read('Auth.User.username'))) {
 
-					echo $this->Html->link('Login to your account', ['controller' => 'Users', 'action' => 'login']);
+						echo $this->Html->link('Login to your account', ['controller' => 'Users', 'action' => 'login']);
 
-				} else {
+					} else {
 
-					echo "Welcome " . $this->request->session()->read('Auth.User.username') . $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout']);; 
+						echo "Welcome " . $this->request->session()->read('Auth.User.username') . $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout']);; 
 
-				}
-				?></a>
-			</li>
-            </ul>
-        </div>
-    </nav>
+					}
+					?></a>
+				</li>
+	            </ul>
+	        </div>
+	    </div>
+	  </div>
+	</nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
