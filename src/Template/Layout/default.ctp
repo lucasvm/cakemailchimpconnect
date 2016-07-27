@@ -57,9 +57,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="#">App Name</a>
 	    </div>
-	    <div>
-	      <ul class="nav navbar-nav">
-	        <li class="active"><?php echo $this->Html->link('Home', ['controller' => 'News', 'action' => 'index']); ?></li>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><?php echo $this->Html->link('Home', ['controller' => 'News', 'action' => 'index']); ?></li>
 	        <li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage
 	          <span class="caret"></span></a>
@@ -69,25 +68,27 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 	            <li><a href="#"><?php echo $this->Html->link('Manage MailChimp', ['controller' => 'Mailchimp', 'action' => 'listmailchimp']); ?></a></li> 
 	          </ul>
 	        </li>
-	      </ul>
-	      <div class="top-bar-section">
-			    <ul class="right">
-					<li><a>
-					<?php
-					if (is_null($this->request->session()->read('Auth.User.username'))) {
-
-						echo $this->Html->link('Login to your account', ['controller' => 'Users', 'action' => 'login']);
-
-					} else {
-
-						echo "Welcome " . $this->request->session()->read('Auth.User.username') . $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout']);; 
-
-					}
-					?></a>
-				</li>
-	            </ul>
-	        </div>
-	    </div>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	          <?php
+	          if (is_null($this->request->session()->read('Auth.User.username'))) {
+	          	echo $this->Html->link('Login to your account', ['controller' => 'Users', 'action' => 'login']);
+	          ?>
+	          <?php	
+	          } else {
+	          ?>
+	          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo "Welcome " . $this->request->session()->read('Auth.User.username'); ?>
+	          <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><?php echo $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout', 'class' => 'glyphicon glyphicon-user']); ?></li>
+	          </ul>
+	          <?php	
+	          }	
+	          ?>
+	          
+	        </li>	
+	    </ul>
 	  </div>
 	</nav>
     <?= $this->Flash->render() ?>
