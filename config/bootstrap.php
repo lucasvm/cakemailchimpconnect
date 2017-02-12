@@ -222,3 +222,7 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
+/*
+** Define MailChimp Api
+** Key
+*/

@@ -81,7 +81,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo "Welcome " . $this->request->session()->read('Auth.User.username'); ?>
 	          <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><?php echo $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout', 'class' => 'glyphicon glyphicon-user']); ?></li>
+	            <li><?php echo $this->Html->link('Logout', 
+	            	['controller' => 'Users', 'action' => 'logout', 'class' => 'glyphicon glyphicon-user']); ?></li>
 	          </ul>
 	          <?php	
 	          }	

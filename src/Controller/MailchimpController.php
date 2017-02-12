@@ -1,4 +1,8 @@
 <?php
+/*
+* Created by Lucas Ansalone
+* MailChimp API Connect With CakePHP 3 
+*/ 
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -21,7 +25,7 @@ class MailchimpController extends AppController
 	*/
 	public function members($listid)
 	{
-		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$apikey = "YOURAPIKEY";
 		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 		$request_type = 'GET';
 	
@@ -47,7 +51,7 @@ class MailchimpController extends AppController
 	public function deletemember($memberid)
 	{
 
-		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$apikey = "YOURAPIKEY";
 		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 		$request_type = 'DELETE';
 	
@@ -73,7 +77,7 @@ class MailchimpController extends AppController
 	{
 		$email = $_POST['memberemail'];
 		$listid = $_POST['listid'];
-		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$apikey = "YOURAPIKEY";
 		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 		$request_type = 'POST';
 		$data = [
@@ -109,7 +113,7 @@ class MailchimpController extends AppController
 	Remove List from Mailchimp Account
 	*/	
 	$listname = $_POST['listname'];
-	$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+	$apikey = "YOURAPIKEY";
 	$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 	$request_type = 'POST';
 	$campaign_details = [
@@ -174,7 +178,7 @@ class MailchimpController extends AppController
 	$listname = $_POST['listname'];
 	$idlist = $_POST['id'];
 	
-	$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+	$apikey = "YOURAPIKEY";
 	$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 	$request_type = 'PATCH';
 	$campaign_details = [
@@ -235,7 +239,7 @@ class MailchimpController extends AppController
 	/*
 	Remove List from Mailchimp Account
 	*/	
-	$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+	$apikey = "YOURAPIKEY";
 	$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 	$request_type = 'DELETE';
 	
@@ -264,7 +268,7 @@ class MailchimpController extends AppController
 
 	public function listMailchimp()
     {
-		$apikey = "48d69210d1cbc449f924198050e4a0cf-us13";
+		$apikey = "YOURAPIKEY";
 		$dataCenter = substr($apikey,strpos($apikey,'-')+1);
 		$request_type = 'GET';
 		$campaign_details = [
